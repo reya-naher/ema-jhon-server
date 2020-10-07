@@ -25,7 +25,7 @@ client.connect(err => {
 
   app.post('/addProduct', (req, res) => {
     const products = req.body;
-    productsCollection.insertOne(products)
+    productsCollection.insertMany(products)
       .then(result => {
         console.log(result.insertedCount)
         res.send(result.insertedCount)
@@ -34,7 +34,7 @@ client.connect(err => {
 
 
   app.get('/products', (req, res) => {
-    productsCollection.find({}).limit(81)
+    productsCollection.find({})
       .toArray((err, documents) => {
         res.send(documents);
     })

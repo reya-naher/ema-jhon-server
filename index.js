@@ -34,7 +34,7 @@ client.connect(err => {
 
 
   app.get('/products', (req, res) => {
-    productsCollection.find({})
+    productsCollection.find({}).limit(81)
       .toArray((err, documents) => {
         res.send(documents);
     })

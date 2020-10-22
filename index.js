@@ -8,8 +8,6 @@ const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster
 
 const app = express()
 
-
-
 app.use(bodyParser.json());
 app.use(cors());
 
@@ -34,8 +32,10 @@ client.connect(err => {
 
 
   app.get('/products', (req, res) => {
-    productsCollection.find({})
+    const search = req.query.search;
+    productsCollection.find({name:{$regex: search}})
       .toArray((err, documents) => {
+        console.log(search)
         res.send(documents);
     })
   })
